@@ -195,6 +195,7 @@ export default function CategoriesList({categories}: CategoriesListProps) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const handleChangePage = (event: unknown, newPage: number) => {
+        console.log(event);
         setPage(newPage);
     };
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {

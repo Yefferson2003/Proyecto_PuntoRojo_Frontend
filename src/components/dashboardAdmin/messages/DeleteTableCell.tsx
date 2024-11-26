@@ -1,4 +1,5 @@
-import { deleteMessage } from "@/api/Messageapi";
+
+import { deleteMessage } from '@/api/MessageApi';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton, TableCell, Tooltip } from "@mui/material";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

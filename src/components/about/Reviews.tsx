@@ -1,8 +1,8 @@
 import { getReviewsVisibility } from "@/api/ReviewApi";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import ReviewsList from "./ReviewsList";
 import Loader from "../Loader";
+import ReviewsList from "./ReviewsList";
 
 function Reviews() {
 
@@ -15,6 +15,7 @@ function Reviews() {
     })
     
     const handlePageChange = (event: unknown, newPage: number) => {
+        console.log(event);
         setPage(newPage);
     };
     

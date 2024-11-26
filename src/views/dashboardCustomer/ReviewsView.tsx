@@ -101,12 +101,12 @@ function ReviewsView() {
                     size="large"
                     precision={1}
                     value={value} // Convertir value a número
-                    onChange={(event, newValue) => {
+                    onChange={(_, newValue) => {
                         if (newValue !== null) {
                             setValue(newValue);
                         }
                     }}
-                    onChangeActive={(event, newHover) => {
+                    onChangeActive={(_, newHover) => {
                         setHover(newHover);
                     }}
                 />

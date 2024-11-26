@@ -2,8 +2,8 @@ import { IconButton, TableCell, Tooltip } from "@mui/material"
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { changeVisibilityMessage } from "@/api/Messageapi";
 import { toast } from "react-toastify";
+import { changeVisibilityMessage } from "@/api/MessageApi";
 
 type VisibilityTableCellProps = {
     visibility: boolean

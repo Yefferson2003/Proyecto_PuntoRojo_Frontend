@@ -37,6 +37,7 @@ function OrdersHistoryDeliveryMan() {
     }, [queryClient, page, rowsPerPage]);
 
     const handlePageChange = (event: unknown, newPage: number) => {
+        console.log(event);
         setPage(newPage);
 
         refetch()

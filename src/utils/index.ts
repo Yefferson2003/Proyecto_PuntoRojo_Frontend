@@ -72,7 +72,7 @@ export const labelsReview: { [index: number]: string } = {
 
 export function getMonthName(dateRange: string): string {
 
-    const [startDate, endDate] = dateRange.split(" - ");
+    const [startDate] = dateRange.split(" - ");
 
     const date = dayjs(startDate);
 

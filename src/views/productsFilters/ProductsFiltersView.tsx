@@ -34,6 +34,7 @@ function ProductsFilters() {
     })
 
     const handlePageChange = (event: unknown, newPage: number) => {
+        console.log(event);
         setPage(newPage);
 
         refetchCat?.();

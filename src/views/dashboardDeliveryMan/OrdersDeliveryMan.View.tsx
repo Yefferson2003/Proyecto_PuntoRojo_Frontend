@@ -47,6 +47,7 @@ function OrdersDeliveryManView() {
     
 
     const handlePageChange = (event: unknown, newPage: number) => {
+        console.log(event);
         setPage(newPage);
     };
     

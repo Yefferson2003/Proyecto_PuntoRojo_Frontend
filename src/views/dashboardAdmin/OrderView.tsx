@@ -48,6 +48,7 @@ export default function OrderView() {
     const queryClient = useQueryClient()
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        console.log(event);
         setValue(newValue);
     };
     
