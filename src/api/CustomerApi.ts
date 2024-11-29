@@ -22,6 +22,8 @@ export async function getOrdersByCustomerById(orderId: Order['id']) {
     try {
         const {data} = await api.get(`/customer/orders/${orderId}`)
         const response = orderDetailsForCustomerSchema.safeParse(data)
+        console.log(response.error);
+        
         if (response.success) {
             return response.data
         }

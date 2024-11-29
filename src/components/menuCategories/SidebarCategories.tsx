@@ -25,6 +25,13 @@ function SidebarCategories({categories} : SidebarCategoriesProps) {
         }));
     };
 
+    const handleNavigate = (path: string, categoryId: number ) => {
+        handleClickCategory(categoryId); 
+        setTimeout(() => {
+            navigate(path)
+        }, 1000);
+    };
+
     
     return (
     <List sx={{background: '#cbd5e1'}}>
@@ -49,7 +56,9 @@ function SidebarCategories({categories} : SidebarCategoriesProps) {
                         <ListItemButton 
                             key={subCategory.id} 
                             sx={{ pl: 4 }}
-                            onClick={() => navigate(`/collections/${category.name.replace(/ /g, '-')}/${subCategory.name.replace(/ /g, '-')}/${subCategory.id}`)}
+                            onClick={() => 
+                                handleNavigate(`/collections/${category.name.replace(/ /g, '-')}/${subCategory.name.replace(/ /g, '-')}/${subCategory.id}`, category.id)
+                            }
                         >
                             <ListItemText sx={{textTransform: 'capitalize '}} primary={subCategory.name} />
                         </ListItemButton>

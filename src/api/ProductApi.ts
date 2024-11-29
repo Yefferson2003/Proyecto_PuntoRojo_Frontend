@@ -16,6 +16,10 @@ export async function getProduts(params = {}) {
     try {
         const {data} = await api.get(`/products`, {params})
         const response = responseProductsSchema.safeParse(data)
+        // console.log(data);
+        
+        // console.log(response.error);
+        
         if (response.success) {
             return response.data
         }

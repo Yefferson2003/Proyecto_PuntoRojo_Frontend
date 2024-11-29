@@ -95,7 +95,7 @@ export const productSchema = z.object({
     id: z.number(),
     name: z.string(),
     nit: z.string(),
-    description: z.string(),
+    description: z.string().nullable(),
     imgUrl: z.string().optional(),
     availability: z.boolean(),
     priceBefore: z.union([z.number(), z.string()]),

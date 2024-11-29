@@ -16,7 +16,7 @@ export default function Error404() {
                 </p>
                 <div className="flex items-center justify-center mt-10 gap-x-6">
                     <Link to={'/'}>
-                        <Button color='error' variant="contained">
+                        <Button color='info' variant="contained">
                             Volver al Inicio
                         </Button>
                     </Link>

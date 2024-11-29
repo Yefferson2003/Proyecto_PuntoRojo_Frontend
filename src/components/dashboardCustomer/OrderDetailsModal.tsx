@@ -1,15 +1,15 @@
 import useChangeOrde from "@/hooks/useChangeOrde";
 import { deliveryTypeTraslatios, paymentMethodTraslatios } from "@/locales/es.";
+import socket from "@/socket/index";
 import { useRootStore } from "@/stores/rootStore";
 import { Customer, DeliveryMan, OrderDetailsForCustomer, SokectData } from "@/types/index";
 import { deliveryPrice, formatCurrencyCOP, formatDateTimeLarge } from "@/utils/index";
-import { Box, Button, Modal } from "@mui/material";
+import { Badge, Box, Button, Modal } from "@mui/material";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
 import { toast } from "react-toastify";
 import ButtonCloseModal from "../ButtonCloseModal";
-import { useEffect } from "react";
-import socket from "@/socket/index";
-import { useQueryClient } from "@tanstack/react-query";
 
 const style = {
     position: 'absolute',
@@ -104,20 +104,19 @@ function OrderDetailsModal({isDeliveryMan, order} : OrderDetailsModalProps) {
                 <div key={index} 
                     className={`flex items-center justify-between gap-1 `}
                 >
-                    <div>
+                    <Badge color="error" badgeContent={item.quantity}>
                         <img className="w-[40px]" src={item.product.imgUrl} alt={item.product.name} />
-                    </div>
+                    </Badge>
 
                     <div className="text-center">
                         <p className="mb-1 capitalize text-wrap">{item.product.name}</p>
-                        <div className="flex justify-between">
-                            <p>{item.quantity}</p>
-                            <p>{formatCurrencyCOP(+item.product.priceAfter)}</p>
-                        </div>
+                        
+                        <p className="font-bold">{formatCurrencyCOP(+item.product.priceAfter)}</p>
+                        
                     </div>
 
                     <div>
-                        <p>{formatCurrencyCOP(item.quantity * +item.product.priceAfter)}</p>
+                        <p className="font-bold text-principal">{formatCurrencyCOP(item.quantity * +item.product.priceAfter)}</p>
                     </div>
                 </div>
             ))}
@@ -127,6 +126,11 @@ function OrderDetailsModal({isDeliveryMan, order} : OrderDetailsModalProps) {
                 <div className="flex justify-between">
                     <p>Items:</p>
                     <p>{totalItems}</p>
+                </div>
+
+                <div className="flex justify-between">
+                    <p>Total:</p>
+                    <p>{formatCurrencyCOP(total)}</p>
                 </div>
                 
                 <div className="flex justify-between">
@@ -140,7 +144,7 @@ function OrderDetailsModal({isDeliveryMan, order} : OrderDetailsModalProps) {
                 
                 <div className="flex justify-between">
                     <p>Subtotal:</p>
-                    <p>{isDelivery ? 
+                    <p className="text-principal">{isDelivery ? 
                         formatCurrencyCOP(total+deliveryPrice): formatCurrencyCOP(total)
                     }</p>
                 </div>
@@ -152,7 +156,7 @@ function OrderDetailsModal({isDeliveryMan, order} : OrderDetailsModalProps) {
                 </h2>
             }
 
-            { (order.status === 'completed' && order.deliveryManId) && 
+            { (order.status === 'completed' && !isDeliveryMan) && 
                 <Button
                     variant="contained"
                     color='error'

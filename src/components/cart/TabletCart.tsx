@@ -5,22 +5,20 @@ import ClearIcon from '@mui/icons-material/Clear';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Button, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useRootStore } from "../../stores/rootStore";
 
 type TabletCartProps = {
     cart: CartItem[]
-    handleClose: () => void
+    handleClose: () => void 
+    handleNavigate: (path : string) => void
 }
 
-function TabletCart({cart, handleClose} : TabletCartProps) {
+function TabletCart({cart, handleClose, handleNavigate} : TabletCartProps) {
 
     const increaseItem = useRootStore(state  => state.increaseItem)
     const decreaseItem = useRootStore(state  => state.decreaseItem)
     const removeFromCart = useRootStore(state  => state.removeFromCart)
     const clearCart = useRootStore(state  => state.clearCart)
-
-    const navigate = useNavigate()
     
     return (
         <section>
@@ -102,8 +100,7 @@ function TabletCart({cart, handleClose} : TabletCartProps) {
                 <Button fullWidth color="error" variant="contained"
                     id="button-view-cart"
                     onClick={ () => {
-                        handleClose()
-                        navigate('/cart')
+                        handleNavigate('/cart')
                     }}
                 >
                     Ver Carrito

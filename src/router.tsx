@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoaderView from "./views/LoaderView";
 
 // Lazy loading para las vistas y layouts
 const IndexLayout = lazy(() => import('@/layouts/IndexLayout'))
@@ -44,7 +45,7 @@ export default function Router() {
     return(
         <>
         <BrowserRouter>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<LoaderView/>}>
             <Routes>
                 <Route path="*" element={<Error404/>}/>
                 <Route element={<IndexLayout/>}>

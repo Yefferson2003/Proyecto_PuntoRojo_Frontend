@@ -4,17 +4,28 @@ import { MouseEvent, useState } from "react";
 import { useRootStore } from "../../stores/rootStore";
 import TabletCart from "./TabletCart";
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import { useNavigate } from 'react-router-dom';
 
 function IconCart() {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const navigate = useNavigate()
+    
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleNavigate = (path:string) => {
+        handleClose()
+        setTimeout(() => {
+            navigate(path)
+        }, 1000);
+        
+    }
 
     const cart = useRootStore(state  => state.cart)
     
@@ -41,10 +52,10 @@ function IconCart() {
                     {!cart.length ? (
                         <div className='w-full space-y-4 text-center'>
                         <p className="font-bold text-center text-principal">No hay productos en tu carrito</p>
-                        <RemoveShoppingCartIcon color='warning'/>                   
+                            <RemoveShoppingCartIcon color='warning'/>                   
                         </div>
                     ) : (
-                        <TabletCart cart={cart} handleClose={handleClose}/>
+                        <TabletCart cart={cart} handleClose={handleClose} handleNavigate={handleNavigate}/>
                     )}
                 </div>
                 
