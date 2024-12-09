@@ -1,6 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 
-const url = 'http://localhost:4000'
+const url = import.meta.env.VITE_BACKEND_URL
 
 const socket: Socket = io(url)
 

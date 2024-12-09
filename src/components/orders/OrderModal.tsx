@@ -128,7 +128,7 @@ function OrderModal({order} : OrderModalProps) {
                             {
                                 onSuccess: () => {
                                     queryClient.invalidateQueries({queryKey: ['order', order.id]})
-                                    queryClient.invalidateQueries({queryKey: ['ordersToday']})
+                                    // queryClient.invalidateQueries({queryKey: ['ordersToday']})
                                     navigate(location.pathname, { replace: true });
                                 }
                             })

@@ -75,8 +75,13 @@ export default function LoginView() {
         <FormControl fullWidth>
           <TextField id="name" label="Nombre" color="error" size="small"
             {...register('name', {
-              required: "El nombre es obligatorio"
+              required: "El nombre es obligatorio",
+              pattern: {
+                value: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s.-]+$/, // Letras, espacios, guiones y puntos
+                message: "El nombre solo puede contener letras, espacios, guiones o puntos",
+              },
             })}
+            
           />
           {errors.name && (
             <ErrorMessage id="errorName">{errors.name.message}</ErrorMessage>
@@ -106,7 +111,11 @@ export default function LoginView() {
               !clietType ? 'Seleccione un tipo de persona' : clietType === 'natural' ? 'Número de identificación' : 'NIT'
             }
             {...register('identification', {
-              required: "El número de identificación es obligatorio"
+              required: "El número de identificación es obligatorio",
+              pattern: {
+                value: /^[0-9]+$/, // Solo números
+                message: "El número de identificación debe contener solo números",
+              },
             })}
           />
           {errors.identification && (

@@ -20,6 +20,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
     /**

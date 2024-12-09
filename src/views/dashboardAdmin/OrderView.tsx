@@ -64,10 +64,14 @@ export default function OrderView() {
         socket.on('changeOrderAdmin', () => {
             queryClient.invalidateQueries({ queryKey: ['ordersToday'] });
         });
+        socket.on('changeOrder', () => {
+            queryClient.invalidateQueries({ queryKey: ['ordersToday'] });
+        });
     
         return () => {
             socket.off('newOrder');
             socket.off('changeOrderAdmin');
+            socket.off('changeOrder');
         };
     }, [queryClient]);
     

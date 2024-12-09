@@ -1,16 +1,34 @@
 import { OrderFormData } from "@/types/index";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import { FormControl, MenuItem, Select, TextField } from "@mui/material";
-import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import ErrorMessage from "../ErrorMessage";
+import { useState } from "react";
 
 type PaymentProcessFormProps = {
     resgister: UseFormRegister<OrderFormData>
     errors: FieldErrors<OrderFormData>
     watch: UseFormWatch<OrderFormData>
+    setValue: UseFormSetValue<OrderFormData>
 }
 
-function PaymentProcessForm({resgister, errors, watch} : PaymentProcessFormProps) {
+function PaymentProcessForm({resgister, errors, watch, setValue} : PaymentProcessFormProps) {
+
+    const [selectedPayment, setSelectedPayment] = useState("");
+
+    const handlePaymentChange = ( e: SelectChangeEvent<string>) => {
+        const paymentOption = e.target.value as string;
+        setSelectedPayment(paymentOption);
+    
+        // Actualizar el valor predeterminado del campo request
+        const paymentMessages: Record<string, string> = {
+            efectivo: "Prefiero pagar en efectivo al recibir el pedido.",
+            transferencia: "Enviaré la transferencia al finalizar la compra.",
+            qr: "Escanearé el QR de Bancolombia para pagar.",
+        };
+    
+        setValue("request", paymentMessages[paymentOption] || "");
+    };
     
     const deliveryType = watch('deliveryType', 'delivery');
     
@@ -51,7 +69,10 @@ function PaymentProcessForm({resgister, errors, watch} : PaymentProcessFormProps
                             id="address" 
                             variant="outlined"
                             placeholder='Ej: Calle 45 # 23-15, Apartamento 301, Barrio Chapinero'
-                            {...resgister('address', {required: 'Dirección de la enttrega Obligatoria'})}
+                            {...resgister("address", {
+                                required: "La dirección es obligatoria.",
+                                maxLength: { value: 200, message: "La dirección no puede exceder los 200 caracteres." },
+                            })}
                         />
                         {errors.address && (
                             <ErrorMessage>{errors.address.message}</ErrorMessage>
@@ -81,7 +102,7 @@ function PaymentProcessForm({resgister, errors, watch} : PaymentProcessFormProps
                 </FormControl>
             </div>
 
-            <div className="space-y-3">
+            <div className="w-full space-y-3">
                 <h2>Medios de pagos aceptados:</h2>
                 <ul>
                     <li className="flex gap-4">
@@ -98,7 +119,20 @@ function PaymentProcessForm({resgister, errors, watch} : PaymentProcessFormProps
                         <h3>Efectivo</h3>
                     </li>
                 </ul>
-                
+                <FormControl fullWidth color="error">
+                <InputLabel id="demo-simple-select-label-2">Seleccione un medio de pago</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label-2"
+                    id="demo-simple-select"
+                    label="Seleccione un medio de pago"
+                    value={selectedPayment}
+                    onChange={handlePaymentChange}
+                >
+                    <MenuItem value="efectivo">Efectivo</MenuItem>
+                    <MenuItem value="transferencia">Transferencia</MenuItem>
+                    <MenuItem value="qr">QR de Bancolombia</MenuItem>
+                </Select>
+                </FormControl>
             </div>
 
             <div className="space-y-3">

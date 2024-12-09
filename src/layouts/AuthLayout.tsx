@@ -1,6 +1,7 @@
 import LogoBgWhite from "@/components/logos/LogoBgWhite"
 import { Link, Outlet } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 function AuthLayout() {
     return (

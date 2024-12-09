@@ -36,7 +36,7 @@ function PaymentProcessView() {
         });
     }, [data]);
     
-    const {register, handleSubmit, watch, reset, formState: { errors }} = useForm({defaultValues: initialValues || {}})
+    const {register, handleSubmit, watch, reset, setValue, formState: { errors }} = useForm({defaultValues: initialValues || {}})
 
     useEffect(() => {
         if (initialValues) {
@@ -143,6 +143,7 @@ function PaymentProcessView() {
                         resgister={register} 
                         errors={errors}
                         watch={watch}
+                        setValue={setValue}
                     />
                     <Button fullWidth type="submit" variant="contained" color="error"
                         disabled={cart.length == 0 || isPending}

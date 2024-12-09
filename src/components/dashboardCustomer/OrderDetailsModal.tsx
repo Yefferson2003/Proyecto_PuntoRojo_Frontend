@@ -22,7 +22,7 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    maxHeight: '95vh',  // Altura máxima en porcentaje de la pantalla
+    maxHeight: '95vh', 
     overflowY: 'auto',
 };
 
@@ -38,7 +38,7 @@ function OrderDetailsModal({isDeliveryMan, order} : OrderDetailsModalProps) {
     const copyCart = useRootStore((state) => state.copyCart)
     const context = useOutletContext<ContextType>();
 
-     // MODAL //
+    // MODAL //
     const navigate = useNavigate(); 
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
